@@ -1,0 +1,28 @@
+.list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.restaurant-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  padding: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.restaurant-card:hover {
+  transform: scale(1.03);
+}
+
+.restaurant-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.restaurant-card p {
+  margin: 0.25rem 0 0;
+  color: #666;
+}

@@ -1,14 +1,18 @@
 import React from "react";
+import "../styles/RestaurantList.css"; // Assuming you have a CSS file for styling
 
 function RestaurantList({ restaurants }) {
   if (!restaurants.length) return null;
 
   return (
-    <ul>
+    <div className="list-container">
       {restaurants.map((r) => (
-        <li key={r.id}>{r.tags?.name || "Unnamed Restaurant"}</li>
+        <div key={r.id} className="restaurant-card">
+          <h3>{r.tags?.name || "Unnamed Place"}</h3>
+          <p>{r.tags?.amenity}</p>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
 
