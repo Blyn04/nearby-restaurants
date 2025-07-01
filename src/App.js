@@ -30,23 +30,32 @@ function App() {
   }, []);
 
   const fetchRestaurants = (lat, lon) => {
-    const query = `
-      [out:json];
-      (
-        node["amenity"="restaurant"](around:500,${lat},${lon});
-        node["amenity"="fast_food"](around:500,${lat},${lon});
-      );
-      out;
-    `;
+  const query = `
+    [out:json];
+    (
+      node["amenity"="restaurant"](around:500,${lat},${lon});
+      node["amenity"="fast_food"](around:500,${lat},${lon});
+      node["amenity"="cafe"](around:500,${lat},${lon});
+      node["amenity"="ice_cream"](around:500,${lat},${lon});
+      node["amenity"="food_court"](around:500,${lat},${lon});
+    );
+    out;
+  `;
+
     const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
 
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        if (data.elements.length === 0) {
+        if (!data.elements || data.elements.length === 0) {
           setLoading("No restaurants found nearby.");
         } else {
-          setRestaurants(data.elements);
+          const withCoords = data.elements.filter((el) => el.lat && el.lon);
+          const withoutCoords = data.elements.filter((el) => !el.lat || !el.lon);
+
+          console.log("⚠️ Skipped items with no coordinates:", withoutCoords);
+
+          setRestaurants(withCoords);
           setLoading(null);
         }
       })
