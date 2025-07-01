@@ -76,6 +76,17 @@ function App() {
     <div>
       <h1>Nearby Food Places</h1>
 
+      <img
+        src={require("./assets/logo.png")}
+        alt="FindFood Logo"
+        style={{
+          display: "block",
+          margin: "0 auto 1rem",
+          width: "120px",
+          height: "auto"
+        }}
+      />
+
       {loading && <p>{loading}</p>}
 
       {location && restaurants.length > 0 && (

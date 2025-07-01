@@ -1,3 +1,11 @@
+:root {
+  --bg-light: #ded5cc;
+  --bg-medium: #d0c7bd;
+  --bg-dark: #b1a495;
+  --accent: #7c5132;
+  --text-dark: #0e0b09;
+}
+
 .list-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -6,23 +14,26 @@
 }
 
 .restaurant-card {
-  background-color: white;
+  background-color: var(--bg-light);
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   padding: 1rem;
   transition: transform 0.2s ease;
+  border: 1px solid var(--bg-dark);
 }
 
 .restaurant-card:hover {
   transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .restaurant-card h3 {
   margin: 0;
   font-size: 1.1rem;
+  color: var(--accent);
 }
 
 .restaurant-card p {
   margin: 0.25rem 0 0;
-  color: #666;
+  color: var(--text-dark);
 }

@@ -1,54 +1,81 @@
 @import "leaflet/dist/leaflet.css";
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ded5cc;
   margin: 0;
-  padding: 2rem;
-  background-color: #f4f4f4;
-}
-
-h1 {
-  color: #333;
-}
-
-ul {
-  padding-left: 1rem;
-}
-
-li {
-  margin-bottom: 0.5rem;
+  padding: 0;
+  color: #0e0b09;
 }
 
 .app-container {
-  padding: 2rem;
   max-width: 960px;
   margin: auto;
+  padding: 2rem;
+  background-color: #d0c7bd;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(124, 81, 50, 0.2);
 }
 
 h1 {
   text-align: center;
+  font-size: 2rem;
   margin-bottom: 1.5rem;
-}
-
-.loading {
-  text-align: center;
-  font-style: italic;
-  margin-top: 2rem;
+  color: #7c5132;
 }
 
 /* Dropdown */
 .filter-container {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
-  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
 select {
-  padding: 0.5rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #b1a495;
+  background-color: #fff;
   font-size: 1rem;
+  color: #0e0b09;
+}
+
+/* Restaurant List */
+.list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.restaurant-card {
+  background-color: #f7f3f0;
+  border: 1px solid #b1a495;
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(124, 81, 50, 0.1);
+}
+
+.restaurant-card:hover {
+  transform: translateY(-5px);
+}
+
+.restaurant-card h3 {
+  margin: 0;
+  color: #7c5132;
+}
+
+.restaurant-card p {
+  margin-top: 0.25rem;
+  color: #4f4035;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 2rem;
+  color: #7c5132;
+  font-style: italic;
 }
