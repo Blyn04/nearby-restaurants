@@ -10,6 +10,7 @@ function RestaurantList({ restaurants }) {
         <div key={r.id} className="restaurant-card">
           <h3>{r.tags?.name || "Unnamed Place"}</h3>
           <p>{r.tags?.amenity}</p>
+          
         </div>
       ))}
     </div>

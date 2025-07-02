@@ -37,8 +37,11 @@ function RestaurantMap({ center, restaurants }) {
           .map((place) => (
             <Marker key={place.id} position={[place.lat, place.lon]}>
               <Popup>
-                {place.tags?.name || "Unnamed"}<br />
-                {place.tags?.amenity || ""}
+                <strong>{place.tags?.name || "Unnamed"}</strong><br />
+                {place.tags?.amenity || ""}<br />
+                {place.tags?.opening_hours 
+                  ? `🕒 Open: ${place.tags.opening_hours}` 
+                  : "🕒 Hours not listed"}
               </Popup>
             </Marker>
           ))}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles/App.css";
 import RestaurantList from "./components/RestaurantList";
 import RestaurantMap from "./components/RestaurantMap";
+import RoulettePicker from "./components/RoulettePicker";
 
 function App() {
   const [location, setLocation] = useState(null);
@@ -20,7 +21,7 @@ function App() {
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
         setLocation({ lat, lon });
-        setLoading("Searching for nearby food places...");
+        setLoading("Searching nearby places...");
         fetchRestaurants(lat, lon);
       },
       (err) => {
@@ -48,13 +49,9 @@ function App() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        if (!data.elements || data.elements.length === 0) {
-          setLoading("No food-related places found nearby.");
-        } else {
-          const withCoords = data.elements.filter((el) => el.lat && el.lon);
-          setRestaurants(withCoords);
-          setLoading(null);
-        }
+        const withCoords = data.elements?.filter((el) => el.lat && el.lon) || [];
+        setRestaurants(withCoords);
+        setLoading(withCoords.length ? null : "No nearby food places found.");
       })
       .catch((err) => {
         console.error(err);
@@ -62,39 +59,28 @@ function App() {
       });
   };
 
-  const handleAmenityChange = (e) => {
-    setSelectedAmenity(e.target.value);
-  };
-
   const filteredRestaurants = selectedAmenity === "all"
     ? restaurants
-    : restaurants.filter(
-        (place) => place.tags?.amenity === selectedAmenity
-      );
+    : restaurants.filter(place => place.tags?.amenity === selectedAmenity);
 
   return (
-    <div>
-      <h1>Nearby Food Places</h1>
+    <main className="app-container">
+      <header className="header">
+        <img src={require("./assets/logo.png")} alt="FindFood Logo" className="logo" />
+        <h1>FINDFOOD</h1>
+      </header>
 
-      <img
-        src={require("./assets/logo.png")}
-        alt="FindFood Logo"
-        style={{
-          display: "block",
-          margin: "0 auto 1rem",
-          width: "120px",
-          height: "auto"
-        }}
-      />
-
-      {loading && <p>{loading}</p>}
+      {loading && <p className="loading">{loading}</p>}
 
       {location && restaurants.length > 0 && (
         <>
-          {/* 🔽 Filter Dropdown */}
-          <div style={{ marginBottom: "1rem" }}>
-            <label htmlFor="amenity-select">Filter by type: </label>
-            <select id="amenity-select" value={selectedAmenity} onChange={handleAmenityChange}>
+          <div className="filter-container">
+            <label htmlFor="amenity-select">Filter: </label>
+            <select
+              id="amenity-select"
+              value={selectedAmenity}
+              onChange={(e) => setSelectedAmenity(e.target.value)}
+            >
               <option value="all">🍽️ All</option>
               <option value="restaurant">🍽️ Restaurant</option>
               <option value="fast_food">🍔 Fast Food</option>
@@ -104,11 +90,12 @@ function App() {
             </select>
           </div>
 
+          <RoulettePicker restaurants={restaurants} />
           <RestaurantMap center={[location.lat, location.lon]} restaurants={filteredRestaurants} />
           <RestaurantList restaurants={filteredRestaurants} />
         </>
       )}
-    </div>
+    </main>
   );
 }
 

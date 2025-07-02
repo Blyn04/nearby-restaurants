@@ -1,0 +1,62 @@
+.roulette-container {
+  background: #fff8f3;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(124, 81, 50, 0.15);
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.roulette-container h2 {
+  color: #7c5132;
+  margin-bottom: 1rem;
+}
+
+.category-select {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #d5c4b5;
+}
+
+.spin-button {
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  background: #7c5132;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background 0.3s ease;
+}
+
+.spin-button:hover {
+  background: #5e3b1f;
+}
+
+.result-card {
+  background: #fdf8f2;
+  border: 1px solid #e3d6cb;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 8px rgba(124, 81, 50, 0.1);
+}
+
+.result-card h3 {
+  color: #7c5132;
+  margin: 0;
+}
+
+.result-card p {
+  color: #4f4035;
+  margin: 0.25rem 0;
+}
+
+.empty-msg {
+  color: #9c7e6b;
+  font-style: italic;
+  margin-top: 1rem;
+}
