@@ -18,12 +18,16 @@ body {
 .app-container {
   max-width: 1024px;
   margin: auto;
-  padding: 2rem 1rem;
+  padding: 1rem;
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* align to left */
+  gap: 1rem;
   margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
 .logo {
