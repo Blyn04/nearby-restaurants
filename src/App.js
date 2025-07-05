@@ -9,6 +9,7 @@ function App() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState("Getting your location...");
   const [selectedAmenity, setSelectedAmenity] = useState("all");
+  const [recenterTrigger, setRecenterTrigger] = useState(false);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -30,6 +31,11 @@ function App() {
       }
     );
   }, []);
+
+  const handleRecenter = () => {
+    setRecenterTrigger(true); // Signal map to recenter
+    setTimeout(() => setRecenterTrigger(false), 100); // Reset
+  };
 
   const fetchRestaurants = (lat, lon) => {
     const query = `
@@ -88,10 +94,18 @@ function App() {
               <option value="ice_cream">🍦 Ice Cream</option>
               <option value="food_court">🍛 Food Court</option>
             </select>
+
+            <button onClick={handleRecenter} className="recenter-btn">
+              📍 Recenter to My Location
+            </button>
           </div>
 
           <RoulettePicker restaurants={restaurants} />
-          <RestaurantMap center={[location.lat, location.lon]} restaurants={filteredRestaurants} />
+          <RestaurantMap
+            center={[location.lat, location.lon]}
+            restaurants={filteredRestaurants}
+            recenter={recenterTrigger}
+          />
           <RestaurantList restaurants={filteredRestaurants} />
         </>
       )}

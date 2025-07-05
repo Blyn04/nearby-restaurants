@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/RestaurantList.css"; // Assuming you have a CSS file for styling
+import "../styles/RestaurantList.css";
 
 function RestaurantList({ restaurants }) {
   if (!restaurants.length) return null;
