@@ -73,7 +73,6 @@ function App() {
     <main className="app-container">
       <header className="header">
         <img src={require("./assets/logo.png")} alt="FindFood Logo" className="logo" />
-        <h1>FINDFOOD</h1>
       </header>
 
       {loading && <p className="loading">{loading}</p>}
