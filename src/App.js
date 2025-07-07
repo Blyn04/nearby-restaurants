@@ -93,18 +93,19 @@ function App() {
               <option value="ice_cream">🍦 Ice Cream</option>
               <option value="food_court">🍛 Food Court</option>
             </select>
+          </div>
 
-            <button onClick={handleRecenter} className="recenter-btn">
+          <div className="map-wrapper">
+            <RestaurantMap
+              center={[location.lat, location.lon]}
+              restaurants={filteredRestaurants}
+              recenter={recenterTrigger}
+            />
+            <button onClick={handleRecenter} className="recenter-btn map-recenter">
               📍 Recenter to My Location
             </button>
           </div>
 
-          <RoulettePicker restaurants={restaurants} />
-          <RestaurantMap
-            center={[location.lat, location.lon]}
-            restaurants={filteredRestaurants}
-            recenter={recenterTrigger}
-          />
           <RestaurantList restaurants={filteredRestaurants} />
         </>
       )}

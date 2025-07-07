@@ -1,11 +1,13 @@
 @import "leaflet/dist/leaflet.css";
 
 :root {
-  --bg: #f4f0eb;
-  --card: #fff;
+  --bg: #d7d0c6;
+  --card: #fffaf3;
   --accent: #7c5132;
+  --accent-light: #a46d4e;
   --shadow: rgba(124, 81, 50, 0.1);
   --text: #2e1e17;
+  --text-muted: #5b4437;
 }
 
 body {
@@ -21,86 +23,165 @@ body {
   padding: 1rem;
 }
 
-/* Make logo and title fixed in top-left corner */
+/* Header with logo */
 .header {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 20px;
+  left: 20px;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
   z-index: 1000;
 }
 
 .logo {
-  width: 150px;
+  width: 160px;
   height: auto;
+  background-color: var(--bg);
+  border-radius: 14px;
+  box-shadow: 0 0 12px rgba(215, 208, 198, 0.6);
 }
 
-h1 {
-  font-size: 1.5rem;
-  color: var(--accent);
-  letter-spacing: 1px;
-  margin: 0;
-}
-
+/* Loading text */
 .loading {
   text-align: center;
   color: var(--accent);
   font-style: italic;
-  margin-top: 2rem;
+  font-size: 1.1rem;
+  margin-top: 3rem;
 }
 
-/* Filter Dropdown */
+/* Filter dropdown and button */
 .filter-container {
+  width: 100vw;
+  max-width: 250px;
+  height: auto; /* or set fixed height like 80px if needed */
+  margin: 2rem auto 1rem calc(5vw - 1rem); /* shift to align with map */
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid #e6ded2;
+  box-shadow: 0 8px 20px rgba(124, 81, 50, 0.08);
 }
 
 select {
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border: 1px solid #c4b7a8;
+  background-color: #fdf9f5;
   font-size: 1rem;
   color: var(--text);
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Restaurant List */
+select:hover {
+  background-color: #f4ede4;
+}
+
+.recenter-btn {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(124, 81, 50, 0.15);
+}
+
+.recenter-btn:hover {
+  background-color: var(--accent-light);
+}
+
+/* Restaurant list */
 .list-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1.25rem;
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
 .restaurant-card {
   background-color: var(--card);
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 4px 12px var(--shadow);
   padding: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid #e0d5c8;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid #e6ded2;
+  position: relative;
+  overflow: hidden;
+}
+
+.restaurant-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: var(--accent);
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
 }
 
 .restaurant-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(124, 81, 50, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(124, 81, 50, 0.15);
 }
 
 .restaurant-card h3 {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: var(--accent);
   margin-bottom: 0.25rem;
 }
 
 .restaurant-card p {
-  color: #5b4437;
+  color: var(--text-muted);
   font-size: 0.95rem;
   margin: 0;
 }
+
+.map-wrapper {
+  position: relative; /* required for absolute child */
+  width: 100vw;
+  max-width: 1720px;
+  margin: 2rem auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(124, 81, 50, 0.15);
+  background: #fefcf8;
+  transform: translateX(-18vw); 
+  margin-top: 100px;
+}
+
+.map-recenter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 999;
+  height: 36px;
+  padding: 0 14px;
+  font-size: 0.85rem;
+  line-height: 36px;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(124, 81, 50, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.map-recenter:hover {
+  background-color: var(--accent-light);
+  transform: translateY(-1px);
+}
+
