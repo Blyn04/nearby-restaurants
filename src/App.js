@@ -3,6 +3,7 @@ import "./styles/App.css";
 import RestaurantList from "./components/RestaurantList";
 import RestaurantMap from "./components/RestaurantMap";
 import RoulettePicker from "./components/RoulettePicker";
+import CustomRoulette from "./components/CustomRoulette"; // 👈 NEW import
 
 function App() {
   const [location, setLocation] = useState(null);
@@ -10,6 +11,7 @@ function App() {
   const [loading, setLoading] = useState("Getting your location...");
   const [selectedAmenity, setSelectedAmenity] = useState("all");
   const [recenterTrigger, setRecenterTrigger] = useState(false);
+  const [useCustomRoulette, setUseCustomRoulette] = useState(false); // 👈 NEW state
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -98,10 +100,22 @@ function App() {
               <option value="ice_cream">🍦 Ice Cream</option>
               <option value="food_court">🍛 Food Court</option>
             </select>
+
+            <button
+              className="recenter-btn"
+              onClick={() => setUseCustomRoulette((prev) => !prev)}
+              style={{ marginLeft: "auto" }}
+            >
+              {useCustomRoulette ? "Use Nearby Roulette" : "🎲 Use Custom Roulette"}
+            </button>
           </div>
 
-          {/* ✅ Your roulette is right here and untouched */}
-          <RoulettePicker restaurants={restaurants} />
+          {/* 🎯 Toggle between default and custom roulette */}
+          {useCustomRoulette ? (
+            <CustomRoulette />
+          ) : (
+            <RoulettePicker restaurants={restaurants} />
+          )}
 
           <div className="map-wrapper">
             <RestaurantMap
@@ -109,10 +123,11 @@ function App() {
               restaurants={filteredRestaurants}
               recenter={recenterTrigger}
             />
-            <button onClick={handleRecenter} className="recenter-btn map-recenter">
-              📍 Recenter to My Location
-            </button>
           </div>
+
+          <button onClick={handleRecenter} className="recenter-btn map-recenter">
+            📍 Recenter to My Location
+          </button>
 
           <RestaurantList restaurants={filteredRestaurants} />
         </>
