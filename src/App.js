@@ -33,8 +33,8 @@ function App() {
   }, []);
 
   const handleRecenter = () => {
-    setRecenterTrigger(true); // Signal map to recenter
-    setTimeout(() => setRecenterTrigger(false), 100); // Reset
+    setRecenterTrigger(true);
+    setTimeout(() => setRecenterTrigger(false), 100);
   };
 
   const fetchRestaurants = (lat, lon) => {
@@ -65,14 +65,19 @@ function App() {
       });
   };
 
-  const filteredRestaurants = selectedAmenity === "all"
-    ? restaurants
-    : restaurants.filter(place => place.tags?.amenity === selectedAmenity);
+  const filteredRestaurants =
+    selectedAmenity === "all"
+      ? restaurants
+      : restaurants.filter((place) => place.tags?.amenity === selectedAmenity);
 
   return (
     <main className="app-container">
       <header className="header">
-        <img src={require("./assets/logo.png")} alt="FindFood Logo" className="logo" />
+        <img
+          src={require("./assets/logo.png")}
+          alt="FindFood Logo"
+          className="logo"
+        />
       </header>
 
       {loading && <p className="loading">{loading}</p>}
@@ -94,6 +99,9 @@ function App() {
               <option value="food_court">🍛 Food Court</option>
             </select>
           </div>
+
+          {/* ✅ Your roulette is right here and untouched */}
+          <RoulettePicker restaurants={restaurants} />
 
           <div className="map-wrapper">
             <RestaurantMap
