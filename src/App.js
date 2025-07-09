@@ -3,7 +3,7 @@ import "./styles/App.css";
 import RestaurantList from "./components/RestaurantList";
 import RestaurantMap from "./components/RestaurantMap";
 import RoulettePicker from "./components/RoulettePicker";
-import CustomRoulette from "./components/CustomRoulette"; // 👈 NEW import
+import CustomRoulette from "./components/CustomRoulette";
 
 function App() {
   const [location, setLocation] = useState(null);
@@ -11,7 +11,7 @@ function App() {
   const [loading, setLoading] = useState("Getting your location...");
   const [selectedAmenity, setSelectedAmenity] = useState("all");
   const [recenterTrigger, setRecenterTrigger] = useState(false);
-  const [useCustomRoulette, setUseCustomRoulette] = useState(false); // 👈 NEW state
+  const [useCustomRoulette, setUseCustomRoulette] = useState(false);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -74,20 +74,29 @@ function App() {
 
   return (
     <main className="app-container">
-      <header className="header">
+      {/* <header className="header">
         <img
           src={require("./assets/logo.png")}
           alt="FindFood Logo"
           className="logo"
         />
-      </header>
+      </header> */}
 
       {loading && <p className="loading">{loading}</p>}
 
       {location && restaurants.length > 0 && (
-        <div className="content-container">
-          <div className="sidebar">
-            <div className="filter-container">
+        <div className="grid-layout">
+          {/* Left Panel */}
+          <div className="left-panel">
+            <div className="logo-circle">
+              <img
+                src={require("./assets/logo.png")}
+                alt="FindFood Logo"
+                className="logo-img"
+              />
+            </div>
+
+            <div className="filter-block">
               <label htmlFor="amenity-select">Filter: </label>
               <select
                 id="amenity-select"
@@ -101,38 +110,41 @@ function App() {
                 <option value="ice_cream">🍦 Ice Cream</option>
                 <option value="food_court">🍛 Food Court</option>
               </select>
+            </div>
 
+            <div className="scrollable-list">
+              <RestaurantList restaurants={filteredRestaurants} />
+            </div>
+          </div>
+
+          {/* Right Panel */}
+          <div className="right-panel">
+            <div className="roulette-box">
+              {useCustomRoulette ? (
+                <CustomRoulette />
+              ) : (
+                <RoulettePicker restaurants={restaurants} />
+              )}
               <button
-                className="recenter-btn"
+                className="recenter-btn toggle-roulette-btn"
                 onClick={() => setUseCustomRoulette((prev) => !prev)}
               >
                 {useCustomRoulette ? "Use Nearby Roulette" : "🎲 Use Custom Roulette"}
               </button>
             </div>
 
-            {useCustomRoulette ? (
-              <CustomRoulette />
-            ) : (
-              <RoulettePicker restaurants={restaurants} />
-            )}
-
-            {/* 🎯 Scrollable list container */}
-            <div className="scrollable-list">
-              <RestaurantList restaurants={filteredRestaurants} />
+            <div className="map-area">
+              <div className="map-wrapper">
+                <RestaurantMap
+                  center={[location.lat, location.lon]}
+                  restaurants={filteredRestaurants}
+                  recenter={recenterTrigger}
+                />
+              </div>
+              <button onClick={handleRecenter} className="recenter-btn map-recenter">
+                📍 Recenter to My Location
+              </button>
             </div>
-          </div>
-
-          <div className="map-area">
-            <div className="map-wrapper">
-              <RestaurantMap
-                center={[location.lat, location.lon]}
-                restaurants={filteredRestaurants}
-                recenter={recenterTrigger}
-              />
-            </div>
-            <button onClick={handleRecenter} className="recenter-btn map-recenter">
-              📍 Recenter to My Location
-            </button>
           </div>
         </div>
       )}
