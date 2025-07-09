@@ -85,52 +85,56 @@ function App() {
       {loading && <p className="loading">{loading}</p>}
 
       {location && restaurants.length > 0 && (
-        <>
-          <div className="filter-container">
-            <label htmlFor="amenity-select">Filter: </label>
-            <select
-              id="amenity-select"
-              value={selectedAmenity}
-              onChange={(e) => setSelectedAmenity(e.target.value)}
-            >
-              <option value="all">🍽️ All</option>
-              <option value="restaurant">🍽️ Restaurant</option>
-              <option value="fast_food">🍔 Fast Food</option>
-              <option value="cafe">☕ Café</option>
-              <option value="ice_cream">🍦 Ice Cream</option>
-              <option value="food_court">🍛 Food Court</option>
-            </select>
+        <div className="content-container">
+          <div className="sidebar">
+            <div className="filter-container">
+              <label htmlFor="amenity-select">Filter: </label>
+              <select
+                id="amenity-select"
+                value={selectedAmenity}
+                onChange={(e) => setSelectedAmenity(e.target.value)}
+              >
+                <option value="all">🍽️ All</option>
+                <option value="restaurant">🍽️ Restaurant</option>
+                <option value="fast_food">🍔 Fast Food</option>
+                <option value="cafe">☕ Café</option>
+                <option value="ice_cream">🍦 Ice Cream</option>
+                <option value="food_court">🍛 Food Court</option>
+              </select>
 
-            <button
-              className="recenter-btn"
-              onClick={() => setUseCustomRoulette((prev) => !prev)}
-              style={{ marginLeft: "auto" }}
-            >
-              {useCustomRoulette ? "Use Nearby Roulette" : "🎲 Use Custom Roulette"}
+              <button
+                className="recenter-btn"
+                onClick={() => setUseCustomRoulette((prev) => !prev)}
+              >
+                {useCustomRoulette ? "Use Nearby Roulette" : "🎲 Use Custom Roulette"}
+              </button>
+            </div>
+
+            {useCustomRoulette ? (
+              <CustomRoulette />
+            ) : (
+              <RoulettePicker restaurants={restaurants} />
+            )}
+
+            {/* 🎯 Scrollable list container */}
+            <div className="scrollable-list">
+              <RestaurantList restaurants={filteredRestaurants} />
+            </div>
+          </div>
+
+          <div className="map-area">
+            <div className="map-wrapper">
+              <RestaurantMap
+                center={[location.lat, location.lon]}
+                restaurants={filteredRestaurants}
+                recenter={recenterTrigger}
+              />
+            </div>
+            <button onClick={handleRecenter} className="recenter-btn map-recenter">
+              📍 Recenter to My Location
             </button>
           </div>
-
-          {/* 🎯 Toggle between default and custom roulette */}
-          {useCustomRoulette ? (
-            <CustomRoulette />
-          ) : (
-            <RoulettePicker restaurants={restaurants} />
-          )}
-
-          <div className="map-wrapper">
-            <RestaurantMap
-              center={[location.lat, location.lon]}
-              restaurants={filteredRestaurants}
-              recenter={recenterTrigger}
-            />
-          </div>
-
-          <button onClick={handleRecenter} className="recenter-btn map-recenter">
-            📍 Recenter to My Location
-          </button>
-
-          <RestaurantList restaurants={filteredRestaurants} />
-        </>
+        </div>
       )}
     </main>
   );
