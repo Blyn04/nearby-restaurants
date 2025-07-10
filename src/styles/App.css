@@ -69,8 +69,8 @@ body {
 
 /* Circular logo */
 .logo-circle {
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   background-color: #aaa;
   display: flex;
@@ -81,7 +81,7 @@ body {
 }
 
 .logo-img {
-  width: 90%;
+  width: 100%;
   height: auto;
 }
 
