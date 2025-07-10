@@ -30,6 +30,7 @@
   cursor: pointer;
   margin-bottom: 1.5rem;
   transition: background 0.3s ease;
+  margin-left: 20px;
 }
 
 .spin-button:hover {
@@ -87,6 +88,7 @@
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(124, 81, 50, 0.1);
+  margin-top: 30px;
 }
 
 .result-card.side-result h3 {
