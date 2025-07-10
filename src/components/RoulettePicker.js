@@ -36,33 +36,35 @@ function RoulettePicker({ restaurants }) {
   };
 
   return (
-    <div className="roulette-container">
-      <h2>🎯 Food Roulette</h2>
+    <div className="roulette-container side-layout">
+      <div className="roulette-controls">
+        <h2>🎯 Food Roulette</h2>
 
-      <select
-        className="category-select"
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-      >
-        {categories.map((c) => (
-          <option key={c.value} value={c.value}>{c.label}</option>
-        ))}
-      </select>
+        <select
+          className="category-select"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          {categories.map((c) => (
+            <option key={c.value} value={c.value}>{c.label}</option>
+          ))}
+        </select>
 
-      <button onClick={spinRoulette} className="spin-button" disabled={spinning}>
-        {spinning ? "Spinning..." : "🎲 Spin"}
-      </button>
+        <button onClick={spinRoulette} className="spin-button" disabled={spinning}>
+          {spinning ? "Spinning..." : "🎲 Spin"}
+        </button>
+
+        {!spinning && filtered.length === 0 && (
+          <p className="empty-msg">No places found in this category.</p>
+        )}
+      </div>
 
       {picked && (
-        <div className="result-card">
+        <div className="result-card side-result">
           <h3>{picked.tags?.name || "Unnamed Place"}</h3>
           <p>{picked.tags?.amenity}</p>
           {picked.tags?.opening_hours && <p>🕒 {picked.tags.opening_hours}</p>}
         </div>
-      )}
-
-      {!spinning && filtered.length === 0 && (
-        <p className="empty-msg">No places found in this category.</p>
       )}
     </div>
   );

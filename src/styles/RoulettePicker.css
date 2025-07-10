@@ -60,3 +60,41 @@
   font-style: italic;
   margin-top: 1rem;
 }
+
+/* Make the layout side by side */
+.roulette-container.side-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: left;
+  gap: 2rem;
+  background: #fff8f3;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(124, 81, 50, 0.15);
+  margin-top: 2rem;
+}
+
+.roulette-controls {
+  flex: 1;
+}
+
+.result-card.side-result {
+  min-width: 240px;
+  max-width: 300px;
+  background: #fdf8f2;
+  border: 1px solid #e3d6cb;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(124, 81, 50, 0.1);
+}
+
+.result-card.side-result h3 {
+  color: #7c5132;
+  margin: 0;
+}
+
+.result-card.side-result p {
+  color: #4f4035;
+  margin: 0.25rem 0;
+}
