@@ -346,3 +346,22 @@ body {
   }
 }
 
+/* Fix roulette-box layout when CustomRoulette is active */
+.roulette-box {
+  flex-direction: column; /* ✅ Stack contents vertically */
+  align-items: stretch;   /* ✅ Make children fill width */ 
+}
+
+.roulette-box {
+  background: #f0efe5;
+  padding: 2rem;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;   /* 🔥 FIX: vertical stacking */
+  align-items: stretch;     /* 🔥 FIX: full width children */
+  gap: 1rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  max-height: 600px;        /* ✅ Optional: prevent overflow */
+  overflow-y: auto;         /* ✅ Scroll if content exceeds */
+}
+

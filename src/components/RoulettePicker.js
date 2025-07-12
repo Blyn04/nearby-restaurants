@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "../styles/RoulettePicker.css";
 
-function RoulettePicker({ restaurants }) {
+function RoulettePicker({ restaurants, useCustomRoulette, setUseCustomRoulette }) {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [picked, setPicked] = useState(null);
   const [spinning, setSpinning] = useState(false);
-  const [useCustom, setUseCustom] = useState(false);
   const [customEntries, setCustomEntries] = useState([""]);
   const [customResult, setCustomResult] = useState("");
 
@@ -60,13 +59,13 @@ function RoulettePicker({ restaurants }) {
     <div className="roulette-container side-layout">
       <div className="roulette-controls">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h2>{useCustom ? "🎲 Custom Roulette" : "🎯 Food Roulette"}</h2>
-          <button className="spin-button" onClick={() => setUseCustom((prev) => !prev)}>
-            {useCustom ? "Use Nearby Roulette" : "Use Custom Roulette"}
+          <h2>{useCustomRoulette ? "🎲 Custom Roulette" : "🎯 Food Roulette"}</h2>
+          <button className="spin-button" onClick={() => setUseCustomRoulette(!useCustomRoulette)}>
+            {useCustomRoulette ? "Use Nearby Roulette" : "Use Custom Roulette"}
           </button>
         </div>
 
-        {!useCustom ? (
+        {!useCustomRoulette ? (
           <>
             <select
               className="category-select"
@@ -126,7 +125,7 @@ function RoulettePicker({ restaurants }) {
       </div>
 
       <div className="result-card side-result">
-        {useCustom ? (
+        {useCustomRoulette ? (
           <p style={{ color: "#7c5132", fontWeight: "bold" }}>
             {customResult || "Add entries and spin"}
           </p>

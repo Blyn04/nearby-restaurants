@@ -1,0 +1,41 @@
+.custom-roulette {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background: #fffaf3;
+  padding: 1rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.custom-roulette input {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #c4b8aa;
+  font-size: 1rem;
+}
+
+.roulette-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.roulette-buttons button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: #7c5132;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.roulette-buttons button:hover {
+  background: #a46d4e;
+}
+
+.roulette-result {
+  font-weight: bold;
+  color: #7c5132;
+  margin-top: 0.5rem;
+}

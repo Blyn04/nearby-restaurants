@@ -3,7 +3,6 @@ import "./styles/App.css";
 import RestaurantList from "./components/RestaurantList";
 import RestaurantMap from "./components/RestaurantMap";
 import RoulettePicker from "./components/RoulettePicker";
-import CustomRoulette from "./components/CustomRoulette";
 
 function App() {
   const [location, setLocation] = useState(null);
@@ -120,17 +119,11 @@ function App() {
           {/* Right Panel */}
           <div className="right-panel">
             <div className="roulette-box">
-              {useCustomRoulette ? (
-                <CustomRoulette />
-              ) : (
-                <RoulettePicker restaurants={restaurants} />
-              )}
-              <button
-                className="recenter-btn toggle-roulette-btn"
-                onClick={() => setUseCustomRoulette((prev) => !prev)}
-              >
-                {useCustomRoulette ? "Use Nearby Roulette" : "🎲 Use Custom Roulette"}
-              </button>
+              <RoulettePicker
+                restaurants={restaurants}
+                useCustomRoulette={useCustomRoulette}
+                setUseCustomRoulette={setUseCustomRoulette}
+              />
             </div>
 
             <div className="map-area">
