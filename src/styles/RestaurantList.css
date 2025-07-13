@@ -14,7 +14,7 @@
 }
 
 .restaurant-card {
-  background-color: var(--bg-light);
+  background-color: #f7f3ef;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   padding: 1rem;
