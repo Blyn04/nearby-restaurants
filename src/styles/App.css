@@ -194,6 +194,9 @@ body {
   gap: 1rem;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
   flex-wrap: wrap;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .toggle-roulette-btn {
@@ -346,23 +349,4 @@ body {
   }
 }
 
-/* Fix roulette-box layout when CustomRoulette is active */
-.roulette-box {
-  flex-direction: column; /* ✅ Stack contents vertically */
-  align-items: stretch;   /* ✅ Make children fill width */ 
-}
-
-.roulette-box {
-  background: #f0efe5;
-  padding: 2rem;
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;       /* Ensure vertical stacking */
-  align-items: stretch;
-  gap: 1rem;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  max-height: 460px;            /* 🚨 LIMIT the height */
-  overflow-y: auto;             /* ✅ SCROLL if it overflows */
-  position: relative;
-}
 

@@ -52,17 +52,17 @@ function RoulettePicker({ restaurants, useCustomRoulette, setUseCustomRoulette }
     const clean = customEntries.filter((e) => e.trim() !== "");
     if (clean.length === 0) return setCustomResult("Add some places!");
     const winner = clean[Math.floor(Math.random() * clean.length)];
-    setCustomResult(`🎯 You should go to: ${winner}`);
+    setCustomResult(`You should go to: ${winner}`);
   };
 
   return (
     <div className="roulette-container side-layout">
       <div className="roulette-controls">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h2>{useCustomRoulette ? "🎲 Custom Roulette" : "🎯 Food Roulette"}</h2>
-          <button className="spin-button" onClick={() => setUseCustomRoulette(!useCustomRoulette)}>
+        <div className="roulette-header">
+          <button className="spin-button toggle-btn" onClick={() => setUseCustomRoulette(!useCustomRoulette)}>
             {useCustomRoulette ? "Use Nearby Roulette" : "Use Custom Roulette"}
           </button>
+          <h2>{useCustomRoulette ? "🎲 Custom Roulette" : "🎯 Food Roulette"}</h2>
         </div>
 
         {!useCustomRoulette ? (
@@ -97,7 +97,7 @@ function RoulettePicker({ restaurants, useCustomRoulette, setUseCustomRoulette }
                 placeholder={`Option ${i + 1}`}
                 style={{
                   display: "block",
-                  width: "100%",
+                  width: "60%",
                   marginBottom: "0.75rem",
                   padding: "0.5rem",
                   borderRadius: "8px",
