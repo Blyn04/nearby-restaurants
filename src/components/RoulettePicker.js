@@ -106,17 +106,11 @@ function RoulettePicker({ restaurants, useCustomRoulette, setUseCustomRoulette }
                 }}
               />
             ))}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "1rem",
-              }}
-            >
-              <button className="recenter-btn" onClick={handleAddEntry}>
+            <div className="custom-btn-group">
+              <button className="custom-btn" onClick={handleAddEntry}>
                 ➕ Add Option
               </button>
-              <button className="recenter-btn" onClick={handleCustomSpin}>
+              <button className="custom-btn" onClick={handleCustomSpin}>
                 🎯 Spin
               </button>
             </div>

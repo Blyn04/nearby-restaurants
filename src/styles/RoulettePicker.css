@@ -100,3 +100,26 @@
   color: #4f4035;
   margin: 0.25rem 0;
 }
+
+.custom-btn-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.custom-btn {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 3px 6px rgba(124, 81, 50, 0.15);
+  transition: background 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: var(--accent-light);
+}
